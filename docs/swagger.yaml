@@ -1,0 +1,75 @@
+openapi: 3.0.2
+info:
+    title: EsteticClinic-API
+    version: 1.0.0
+    description: '### This is a Swagger UI for our EsteticClinic API'
+paths:
+    /EsteticClinic:
+        get:
+            tags:
+                - estetic
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                List of estetic services:
+                                    value:
+                                        - Botox
+                                        - LPG massage
+                                        - Manual teraphy
+                    description: Returns a list of ectetic services
+            summary: Get a list of all estetic services
+            description: Returns a list of all estetic services in API
+    '/EsteticClinic/{id}':
+        get:
+            tags:
+                - details
+            parameters:
+                -
+                    examples:
+                        Integer of id:
+                            value: '37'
+                    name: id
+                    description: Id for given estetic service
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Returns full details of a given id estetic services
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                'Estetic services  /w+ was not found ':
+                                    value:
+                                        error: Estetic services  /w+ was not found in a service array
+                    description: Estetic services was not found in games array
+            operationId: id
+            summary: Get full details of estetic services
+            description: Returns full details of a given id estetic services
+components:
+    schemas:
+        error:
+            title: Root Type for error
+            description: ''
+            type: object
+            properties:
+                error:
+                    type: string
+            example:
+                error: Error message.
