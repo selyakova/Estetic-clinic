@@ -25,6 +25,36 @@ paths:
                     description: Returns a list of ectetic services
             summary: Get a list of all estetic services
             description: Returns a list of all estetic services in API
+        post:
+            requestBody:
+                description: A new estetic service to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/error'
+                        examples:
+                            service not found:
+                                value:
+                                    error: Estetic service not found
+                required: true
+            tags:
+                - new-services
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/new-services'
+                            examples:
+                                Service that is added:
+                                    value:
+                                        name: estetic service name
+                                        price: 31.73
+                    description: Added new estetic services has been created
+                '404':
+                    description: One or all params are missing
+            summary: Creates a estetic services into the API
+            description: Creates a new estetic services
     '/EsteticClinic/{id}':
         get:
             tags:
@@ -73,3 +103,19 @@ components:
                     type: string
             example:
                 error: Error message.
+        new-services:
+            title: Root Type for new-services
+            description: ''
+            required:
+                - name
+                - price
+            type: object
+            properties:
+                name:
+                    type: string
+                price:
+                    format: float
+                    type: number
+            example:
+                name: bOTOX 2.0
+                price: 0.99
