@@ -43,15 +43,21 @@ app.post('/Esteticclinic', (req, res) => {
     }
     estetic.push(estserv)
     res.status(201)
-    .location(`${getBaseUrl(req)}/esteticclinic/${estetic.length}`)
+    .location(`${getBaseUrl(req)}/Esteticclinic/${estetic.length}`)
     .send(estserv)
 })
 
 
-
 app.use(express.json())
 
-//app.delete('/esteticclinic/:id',)
+app.delete('/Esteticclinic/:id', (req, res) => {
+    if (typeof estetic[req.params-id - 1] === 'undefined') {
+        return res.status(404).send({error: "Service not found"})
+    }
+    estetic.splice(req.params.id -1, 1)
+
+    res.status(204).send({error: "No content"})
+})
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
