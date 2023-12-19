@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+      "title": "EsteticClinic-API",
+      "version": "1.0.0",
+      "description": "### This is a Swagger UI for our EsteticClinic API"
+  },
+  "paths": {
+      "/EsteticClinic": {
+          "get": {
+              "tags": [
+                  "estetic"
+              ],
+              "responses": {
+                  "200": {
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "type": "array",
+                                  "items": {
+                                      "type": "string"
+                                  }
+                              },
+                              "examples": {
+                                  "List of estetic services": {
+                                      "value": [
+                                          "Botox",
+                                          "LPG massage",
+                                          "Manual teraphy"
+                                      ]
+                                  }
+                              }
+                          }
+                      },
+                      "description": "Returns a list of ectetic services"
+                  }
+              },
+              "summary": "Get a list of all estetic services",
+              "description": "Returns a list of all estetic services in API"
+          }
+      }
+  }
+}

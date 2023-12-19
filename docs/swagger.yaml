@@ -1,0 +1,171 @@
+openapi: 3.0.2
+info:
+    title: EsteticClinic-API
+    version: 1.0.0
+    description: '### This is a Swagger UI for our EsteticClinic API'
+paths:
+    /EsteticClinic:
+        get:
+            tags:
+                - estetic
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                            examples:
+                                List of estetic services:
+                                    value:
+                                        - Botox
+                                        - LPG massage
+                                        - Manual teraphy
+                    description: Returns a list of ectetic services
+            summary: Get a list of all estetic services
+            description: Returns a list of all estetic services in API
+        post:
+            requestBody:
+                description: A new estetic service to be created
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/error'
+                        examples:
+                            service not found:
+                                value:
+                                    error: Estetic service not found
+                required: true
+            tags:
+                - new-services
+            responses:
+                '201':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/new-services'
+                            examples:
+                                Service that is added:
+                                    value:
+                                        name: estetic service name
+                                        price: 31.73
+                    description: Added new estetic services has been created
+                '404':
+                    description: One or all params are missing
+            summary: Creates a estetic services into the API
+            description: Creates a new estetic services
+    '/EsteticClinic/{id}':
+        get:
+            tags:
+                - details
+            parameters:
+                -
+                    examples:
+                        Integer of id:
+                            value: '37'
+                    name: id
+                    description: Id for given estetic service
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: string
+                    description: Returns full details of a given id estetic services
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                'Estetic services  /w+ was not found ':
+                                    value:
+                                        error: Estetic services  /w+ was not found in a service array
+                    description: Estetic services was not found in games array
+            operationId: id
+            summary: Get full details of estetic services
+            description: Returns full details of a given id estetic services
+        delete:
+            tags:
+                - delete
+            parameters:
+                -
+                    examples:
+                        Delete:
+                            value: '15'
+                    name: id
+                    description: ID for service in
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+            responses:
+                '204':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                204 response:
+                                    value:
+                                        error: No content
+                    description: No content
+                '404':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/error'
+                            examples:
+                                Service /w+ was not found:
+                                    value:
+                                        error: Service /w+ was not found
+                    description: Service not found
+            operationId: ID
+            summary: Delete a service by id
+            description: Deletes a service of a given id
+components:
+    schemas:
+        error:
+            title: Root Type for error
+            description: ''
+            type: object
+            properties:
+                error:
+                    type: string
+            example:
+                error: Error message.
+        new-services:
+            title: Root Type for new-services
+            description: ''
+            required:
+                - name
+                - price
+            type: object
+            properties:
+                name:
+                    type: string
+                price:
+                    format: float
+                    type: number
+            example:
+                name: bOTOX 2.0
+                price: 0.99
+        delete-service:
+            title: Root Type for delete-service
+            description: This data type is currently a complex object
+            required:
+                - id
+            type: object
+            properties:
+                id:
+                    format: int32
+                    type: integer
+            example:
+                id: 1
