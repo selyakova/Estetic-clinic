@@ -52,7 +52,7 @@ app.post('/Esteticclinic', (req, res) => {
 app.use(express.json())
 
 app.delete('/Esteticclinic/:id', (req, res) => {
-    if (typeof estetic[req.params-id - 1] === 'undefiend') {
+    if (typeof estetic[req.params-id - 1] === 'undefined') {
         return res.status(404).send({error: "Service not found"})
     }
     estetic.splice(req.params.id -1, 1)
