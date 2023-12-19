@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 //const app = require('express')();
@@ -7,7 +8,7 @@ const swaggerUi = require('swagger-ui-express')
 const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load('./docs/swagger.yaml');
 //const swaggerDocument = require('./docs/swagger.json');
-
+app.use(cors())
 
 
 const estetic = [
@@ -51,7 +52,7 @@ app.post('/Esteticclinic', (req, res) => {
 app.use(express.json())
 
 app.delete('/Esteticclinic/:id', (req, res) => {
-    if (typeof estetic[req.params-id - 1] === 'undefined') {
+    if (typeof estetic[req.params-id - 1] === 'undefiend') {
         return res.status(404).send({error: "Service not found"})
     }
     estetic.splice(req.params.id -1, 1)
