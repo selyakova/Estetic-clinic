@@ -1,9 +1,12 @@
+require("dotenv").config();
 const express = require('express')
-const cors = require('cors')
-const app = express()
+const app = express();
+const port = process.env.APP_PORT;
+const mariadb = require("mariadb");
+const cors = require('cors');
 
 //const app = require('express')();
-const port = 8080
+//const port = 8080
 const swaggerUi = require('swagger-ui-express')
 const yamljs = require('yamljs')
 const swaggerDocument = yamljs.load('./docs/swagger.yaml');
@@ -11,19 +14,21 @@ const swaggerDocument = yamljs.load('./docs/swagger.yaml');
 app.use(cors())
 
 
-const estetic = [
+/* const estetic = [
     {id: 1, name: "Botox", price:250},
     {id: 2, name:"LPG massage", price:70},
     {id: 3, name:"Manual teraphy", price:90}
-]
+] */
+
+require("./routes/app_routes")(app)
 
 app.get('/Esteticclinic', (req, res) => {
     res.send(estetic)
 })
 
-app.get('/Esteticclinic', (req, res) => {
-    res.send(estetic)
-})
+//app.get('/Esteticclinic', (req, res) => {
+   // res.send(estetic)
+//})
 
 app.get('/Esteticclinic/:id', (req,res) => {
     if (typeof estetic[req.params.id -1] === 'undifined')
@@ -62,7 +67,7 @@ app.delete('/Esteticclinic/:id', (req, res) => {
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
-app.listen(port, () => {
+app.listen(port, async() => {
     console.log(`API up at: http://localhost:${port}`)
 })
 
