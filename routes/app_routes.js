@@ -6,4 +6,6 @@ module.exports = (app) => {
     .get(EsteticController.createNew)
     app.route("/estetic-clinic/:id")
     .get(EsteticController.getById)
+    .put(EsteticController.updateById)
+    .delete(EsteticController.deleteById)
 }
