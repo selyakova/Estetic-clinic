@@ -1,43 +1,698 @@
 {
-  "openapi": "3.0.2",
-  "info": {
-      "title": "EsteticClinic-API",
-      "version": "1.0.0",
-      "description": "### This is a Swagger UI for our EsteticClinic API"
-  },
-  "paths": {
-      "/EsteticClinic": {
-          "get": {
-              "tags": [
-                  "estetic"
-              ],
-              "responses": {
-                  "200": {
-                      "content": {
-                          "application/json": {
-                              "schema": {
-                                  "type": "array",
-                                  "items": {
-                                      "type": "string"
-                                  }
-                              },
-                              "examples": {
-                                  "List of estetic services": {
-                                      "value": [
-                                          "Botox",
-                                          "LPG massage",
-                                          "Manual teraphy"
-                                      ]
-                                  }
-                              }
-                          }
-                      },
-                      "description": "Returns a list of ectetic services"
-                  }
-              },
-              "summary": "Get a list of all estetic services",
-              "description": "Returns a list of all estetic services in API"
-          }
-      }
-  }
+    "openapi": "3.0.2",
+    "info": {
+        "title": "EsteticClinic-API",
+        "version": "1.0.0",
+        "description": "### This is a Swagger UI for our EsteticClinic API"
+    },
+    "paths": {
+        "/orders": {
+            "get": {
+                "tags": [
+                    "orders"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "examples": {
+                                    "List of orders": {
+                                        "value": [
+                                            34,
+                                            46
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "\r\nReturns a list of all orders in API"
+                    }
+                },
+                "summary": "Get list of all clients",
+                "description": "Returns a list of all orders in API"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/error"
+                            },
+                            "examples": {
+                                "Order not found": {
+                                    "value": {
+                                        "error": "Order not found"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "new-orders"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-orders"
+                                },
+                                "examples": {
+                                    "Order that is added": {
+                                        "value": {
+                                            "id": 99
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Added new orders has been created"
+                    },
+                    "404": {
+                        "description": "One or all params are missing"
+                    }
+                },
+                "description": "Creates a new orders"
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "integer of id": {
+                                "value": "82"
+                            }
+                        },
+                        "name": "id",
+                        "description": "id of given orders",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id orders"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Orders /w+ was not found in a service array": {
+                                        "value": {
+                                            "error": "Orders /w+ was not found in a service array"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Orders was not found in games array"
+                    }
+                },
+                "operationId": "ID_orders",
+                "summary": "Get full details of orders",
+                "description": "Returns full details of a given id orders"
+            },
+            "delete": {
+                "tags": [
+                    "delete"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "delete": {
+                                "value": "71"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Id_orders for order in",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "204 response": {
+                                        "value": {
+                                            "error": "No content"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Order /w+ was not found": {
+                                        "value": {
+                                            "error": "Order /w+ was not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Order not found"
+                    }
+                },
+                "operationId": "Id_orders",
+                "summary": "Delete a orderby id",
+                "description": "Deletes a order of a given id"
+            }
+        },
+        "/clients": {
+            "get": {
+                "tags": [
+                    "clients"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of clients": {
+                                        "value": [
+                                            "anastassia",
+                                            "olga"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of all clients in API"
+                    }
+                },
+                "summary": "Get list of all clients",
+                "description": "Returns a list of all clients in API"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/error"
+                            },
+                            "examples": {
+                                "client not found": {
+                                    "value": {
+                                        "error": "Client not found"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "new-clients"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-clients"
+                                },
+                                "examples": {
+                                    "Service that is added": {
+                                        "value": {
+                                            "name": "anastassia",
+                                            "birthday": "1996-01-25",
+                                            "identityCode": 9
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Added new clients has been created"
+                    },
+                    "404": {
+                        "description": "One or all params are missing"
+                    }
+                },
+                "description": "Creates a new clients"
+            }
+        },
+        "/clients/{id}": {
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Integer of Id": {
+                                "value": "2"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Id for given clients",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id clients"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Clients  /w+ was not found in a service array": {
+                                        "value": {
+                                            "error": "Clients  /w+ was not found in a service array"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Client was not found in games array"
+                    }
+                },
+                "operationId": "ID_clients",
+                "summary": "Get full details of clients",
+                "description": "Get full details of clients"
+            },
+            "delete": {
+                "tags": [
+                    "client-delete"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Delete": {
+                                "value": "63"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Id_clients fo clients in",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "204 response": {
+                                        "value": {
+                                            "error": "No content"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id clients"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Client /w+ was not found": {
+                                        "value": {
+                                            "error": "Client /w+ was not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Client not found"
+                    }
+                },
+                "operationId": "Id_clients",
+                "summary": "Delete a client by id",
+                "description": "Deletes a clint ag of a given id"
+            }
+        },
+        "/Estetic-Clinic": {
+            "get": {
+                "tags": [
+                    "estetic"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "List of estetic services": {
+                                        "value": [
+                                            "Botox",
+                                            "LPG massage",
+                                            "Manual teraphy"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns a list of ectetic services"
+                    }
+                },
+                "summary": "Get a list of all estetic services",
+                "description": "Returns a list of all estetic services in API"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new estetic service to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/error"
+                            },
+                            "examples": {
+                                "service not found": {
+                                    "value": {
+                                        "error": "Estetic service not found"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "new-services"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/new-services"
+                                },
+                                "examples": {
+                                    "Service that is added": {
+                                        "value": {
+                                            "name": "estetic service name",
+                                            "price": 31.73
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Added new estetic services has been created"
+                    },
+                    "404": {
+                        "description": "One or all params are missing"
+                    }
+                },
+                "summary": "Creates a estetic services into the API",
+                "description": "Creates a new estetic services"
+            }
+        },
+        "/Estetic-Clinic/{id}": {
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Integer of id": {
+                                "value": "37"
+                            }
+                        },
+                        "name": "id",
+                        "description": "Id for given estetic service",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Returns full details of a given id estetic services"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Estetic services  /w+ was not found ": {
+                                        "value": {
+                                            "error": "Estetic services  /w+ was not found in a service array"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Estetic service was not found in games array"
+                    }
+                },
+                "operationId": "id",
+                "summary": "Get full details of estetic services",
+                "description": "Returns full details of a given id estetic services"
+            },
+            "delete": {
+                "tags": [
+                    "delete"
+                ],
+                "parameters": [
+                    {
+                        "examples": {
+                            "Delete": {
+                                "value": "15"
+                            }
+                        },
+                        "name": "id",
+                        "description": "ID for service in",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "204 response": {
+                                        "value": {
+                                            "error": "No content"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "No content"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Service /w+ was not found": {
+                                        "value": {
+                                            "error": "Service /w+ was not found"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Service not found"
+                    }
+                },
+                "operationId": "ID",
+                "summary": "Delete a service by id",
+                "description": "Deletes a service of a given id"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error message."
+                }
+            },
+            "new-services": {
+                "title": "Root Type for new-services",
+                "description": "",
+                "required": [
+                    "name",
+                    "price"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "format": "float",
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "name": "bOTOX 2.0",
+                    "price": 0.99
+                }
+            },
+            "delete-service": {
+                "title": "Root Type for delete-service",
+                "description": "This data type is currently a complex object",
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "id": 1
+                }
+            },
+            "new-clients": {
+                "description": "",
+                "required": [
+                    "name",
+                    "birthday",
+                    "identityCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "identityCode": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "name": "anastassia",
+                    "birthday": "1996-01-25",
+                    "identityCode": 9
+                }
+            },
+            "new-orders": {
+                "description": "",
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
 }
