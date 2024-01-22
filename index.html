@@ -17,6 +17,10 @@
             <td @click="getService(service.id)">{{service.name}}</td>
             <td>{{ service.price }}</td>
         </tr>
+        <td>
+            <button @click="addService(service.id)">Add</button>
+            <button @click="deleteService(service.id)">Delete</button>
+        </td>
     </table>
     <div id="counter">
       </div>
@@ -50,6 +54,10 @@
             <td>{{ client.birthday }}</td>
             <td>{{ client.identityCode }}</td>
         </tr>
+        <td>
+            <button @click="addService(service.id)">Add</button>
+            <button @click="deleteService(service.id)">Delete</button>
+        </td>
     </table>
     <div id="counter">
         </div>
@@ -82,6 +90,10 @@
             <td @click="getOrder(order.id)">{{ order.service_id }}</td>
             <td>{{ order.client_id }}</td>
         </tr>
+        <td>
+            <button @click="addService(service.id)">Add</button>
+            <button @click="deleteService(service.id)">Delete</button>
+        </td>
     </table>
         <div id="counter">
         </div>

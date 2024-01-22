@@ -17,7 +17,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 db.services = require("./models/service.model")(sequelize,Sequelize)
 db.clients = require("./models/client.model")(sequelize,Sequelize)
-db.orders = require("./models/order.model")(sequelize,Sequelize)
+db.orders = require("./models/order.model")(sequelize,Sequelize,db.clients,db.services)
 
 module.exports = db
 
