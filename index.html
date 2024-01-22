@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Estetic Clinic</title>
-    <link rel="stylesheet" type="text/css" href="">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 <div id="app">
-    <table id="serviceTable" class="table table-striped table-bordered">        
+    <h1 class="text-left">Estetic Services</h1>
+    <table id="serviceTable" class="table table-striped table-bordered" style="width: 50%;">        
         <tr>
             <th>name</th>
             <th>price</th>
@@ -17,10 +18,10 @@
             <td @click="getService(service.id)">{{service.name}}</td>
             <td>{{ service.price }}</td>
         </tr>
-        <td>
+        <!-- <td>
             <button @click="addService(service.id)">Add</button>
             <button @click="deleteService(service.id)">Delete</button>
-        </td>
+        </td> -->
     </table>
     <div id="counter">
       </div>
@@ -43,7 +44,8 @@
                 </div>
             </div>
       </div>
-    <table id="clientsTable" class="table table-striped table-bordered">
+      <h1 class="text-left">Clients</h1>
+    <table id="clientsTable" class="table table-striped table-bordered" style="width: 50%;">
         <tr>
             <th>name</th>
             <th>birthday</th>
@@ -54,10 +56,10 @@
             <td>{{ client.birthday }}</td>
             <td>{{ client.identityCode }}</td>
         </tr>
-        <td>
+        <!-- <td>
             <button @click="addService(service.id)">Add</button>
             <button @click="deleteService(service.id)">Delete</button>
-        </td>
+        </td> -->
     </table>
     <div id="counter">
         </div>
@@ -81,7 +83,8 @@
                   </div>
               </div>
     </div>
-    <table id="ordersTable" class="table table-striped table-bordered">
+    <h1 class="text-left">Orders</h1>
+    <table id="ordersTable" class="table table-striped table-bordered" style="width: 50%;">
         <tr>
             <th>Service ID</th>
             <th>Client ID</th>
@@ -90,10 +93,10 @@
             <td @click="getOrder(order.id)">{{ order.service_id }}</td>
             <td>{{ order.client_id }}</td>
         </tr>
-        <td>
+        <!-- <td>
             <button @click="addService(service.id)">Add</button>
             <button @click="deleteService(service.id)">Delete</button>
-        </td>
+        </td> -->
     </table>
         <div id="counter">
         </div>
